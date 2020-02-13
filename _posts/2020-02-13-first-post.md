@@ -90,50 +90,10 @@ def email():
     document = 'email sent to ' + msg.recipients[0]
     return document
 
-
 if __name__ == '__main__':
     app.run(debug=True)
 
 <code>
-</pre>
-* * * 
-<pre>
-<code>
-<!doctype html>
-<html>
-
-<head>
-Current E-mail : {{currentHTML}}
-</head>
-
-<body>
-
-<script>
-function button1_click(){
-alert("you pressed button");
-}
-</script>
-
- <h1>Email System</h1>
-
- <h1>{{ content }}</h1>
-
-   <dt>Email_Receiver:</dt>
-
-
-<form action="/email" method="post">
-
-   <dd>
-    <input type="text" name=email_receiver value="" />
-   </dd>
-<input type = "submit" value = "apply">
-
-</form>
-
-</body>
-
-</html>
-</code>
 </pre>
 
 * * *
