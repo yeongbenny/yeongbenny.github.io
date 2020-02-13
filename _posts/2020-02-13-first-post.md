@@ -28,6 +28,77 @@ Hence, I spent quite a long time studying these, and this article is going to be
 HTML is a markup language that consists of the basis of a webpage. It has a certain format 
 this is the example of the index.html page that I created while practicing. Under <script> goes JavaScript grammer.
 
+## CSS
+CSS is a Cascading Style Sheets that decorates the HTML
+and it uses <style>
+ 
+## JavaScript
+JavaScript is about all dynamic functions that happen on the web. It can go under the <script> section in html or can get in a separate .js file under a static folder when using Flask.
+ 
+## jQuery
+It is a library of JavaScript that could shorten the code. We can either use a link through CDN, or download jQuery file. 
+
+# AJAX
+AJAX is a shortened word for Asynchronous JavaScript and XML. This is important as it lets asynchronous communication possible between client and a server. Before AJAX, to change the contents of a website, users had to request another .html and required the entire reload process. By using AJAX, users can request or get data from the server without reloading.
+
+## Web Socket
+More advanced version of AJAX. It solves the problem that Server couldn’t start communicating unless they receive a request. Need to study more about this
+
+## Web Server and Framework
+Node.js, Flask, Django are all examples of web framework that helps developing, but to finally deploy they need to be integrated with Web Servers such as IIS or Apache. There are two ways data could be sent to the server. GET and POST. 
+GET is sending via URL, and POST puts data in a packet body
+
+## Email Code
+While working on the email part of our plug-in , I used knowledge from above to build a simple webpage that automatically sends email to a certain user and below is the code.
+
+<pre>
+<code>
+# importing libraries
+from flask import Flask, render_template, request
+from flask_mail import Mail, Message
+
+app = Flask(__name__)
+mail = Mail(app)  # instantiate the mail class
+
+# configuration of mail
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = '*******'
+app.config['MAIL_PASSWORD'] = '*******'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
+
+currentMail = 'zeroship1010@gmail.com'
+
+# message object mapped to a particular URL ‘/’
+
+@app.route("/")
+def index():
+    return render_template('index.html',currentHTML=currentMail)
+
+@app.route("/email", methods=['POST'])
+def email():
+    currentMail = request.form['email_receiver']
+    msg = Message(
+        'another test',
+        sender='zzaxex6@gmail.com',
+        recipients=[currentMail]
+    )
+    msg.body = 'Hello Flask message sent from Flask-Mail'
+    mail.send(msg)
+    document = 'email sent to ' + msg.recipients[0]
+    return document
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+<code>
+</pre>
+* * * 
+<pre>
+<code>
 <!doctype html>
 <html>
 
@@ -62,3 +133,15 @@ alert("you pressed button");
 </body>
 
 </html>
+</code>
+</pre>
+
+* * *
+
+## Actual Practice on Web
+
+https://code.tutsplus.com/ko/tutorials/creating-a-web-app-from-scratch-using-python-flask-and-mysql--cms-22972
+
+My upcoming plan is to go through all these lectures to realize an actual web application with server and database
+
+
